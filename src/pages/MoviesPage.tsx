@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import MoviesComponent from "../components/MoviesContainer/MoviesComponent";
 import {useSearchParams} from "react-router-dom";
 import {IPaginatedMoviePageModel} from "../interfaces/IPaginatedMoviePageModel";
-import {IMovieModel} from "../interfaces/IMovieModel";
+import {movieService} from "../services/movie.service";
 
 const MoviesPage = () => {
     const [query, setQuery] = useSearchParams({
@@ -10,17 +10,23 @@ const MoviesPage = () => {
     });
 
     const [moviesPaginatedObject, setMoviesPaginatedObject] = useState<IPaginatedMoviePageModel>({
-        page: 1,
         results: [],
+        page: 1,
         total_pages: 0,
         total_results: 0
     });
 
-
+    useEffect(() => {
+        movieService.getAllMovies(query.get('page') || '1').then(value => {
+            if (value) {
+                setMoviesPaginatedObject(value);
+            }
+        });
+    }, [query]);
 
     return (
         <div>
-            <MoviesComponent/>
+            <MoviesComponent movies={moviesPaginatedObject.results}/>
         </div>
     );
 };

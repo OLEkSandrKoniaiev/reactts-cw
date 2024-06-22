@@ -6,8 +6,8 @@ import {movieService} from "../services/movie.service";
 
 const MainLayout = () => {
     const csajk = ():void => {
-        movieService.getAllMovies(1);
-        movieService.getAllMovies(2);
+        movieService.getAllMovies('1');
+        movieService.getAllMovies('2');
     }
 
     return (
