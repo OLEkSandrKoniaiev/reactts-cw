@@ -1,9 +1,9 @@
 import React from 'react';
+import GenresComponent from "../components/GenresContainer/GenresComponent";
 import MoviesList from "../components/MoviesContainer/MoviesList";
 import PaginationComponent from "../components/PaginationContainer/PaginationComponent";
-import GenresComponent from "../components/GenresContainer/GenresComponent";
 
-const MoviesPage = () => {
+const GenresPage = () => {
     return (
         <div>
             <GenresComponent/>
@@ -13,4 +13,4 @@ const MoviesPage = () => {
     );
 };
 
-export default MoviesPage;
+export default GenresPage;

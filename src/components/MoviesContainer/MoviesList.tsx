@@ -9,12 +9,16 @@ const MoviesList = () => {
         page: '1'
     });
 
-    const {movies, currentPage} = useAppSelector(state => state.movies)
+    const {movies, currentPage, genre, error} = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(movieActions.getAllMovies(parseInt(query.get('page'))));
-    }, [query, dispatch]);
+        if (genre) {
+            dispatch(movieActions.getAllMoviesByGenre({ page: parseInt(query.get('page')!), genreId: genre }));
+        } else {
+            dispatch(movieActions.getAllMovies(parseInt(query.get('page')!)));
+        }
+    }, [query, dispatch, genre]);
 
     useEffect(() => {
         setQuery({page: currentPage.toString()});

@@ -12,7 +12,7 @@ const initialState: IState = {
     error: null
 };
 
-const getAllGenres = createAsyncThunk<IGenreModel[]>(
+const getAllGenres = createAsyncThunk<IGenreModel[], void, { rejectValue: string }>(
     'genreSlice/getAllGenres',
     async (_, {rejectWithValue}) => {
         try {
@@ -26,7 +26,9 @@ const getAllGenres = createAsyncThunk<IGenreModel[]>(
 const genreSlice = createSlice({
     name: 'genreSlice',
     initialState,
-    reducers: {},
+    reducers: {
+
+    },
     extraReducers: builder =>
         builder
             .addCase(getAllGenres.fulfilled, (state, action) => {

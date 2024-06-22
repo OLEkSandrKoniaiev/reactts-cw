@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {movieActions} from "../../redux/slices/movieSlice";
 
 const PaginationComponent = () => {
-    const [query, setQuery] = useSearchParams({
+    const [query] = useSearchParams({
         page: '1'
     });
 
