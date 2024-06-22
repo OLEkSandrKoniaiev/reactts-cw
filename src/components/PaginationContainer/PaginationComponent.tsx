@@ -1,44 +1,33 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useSearchParams} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
+import {movieActions} from "../../redux/slices/movieSlice";
 
 const PaginationComponent = () => {
     const [query, setQuery] = useSearchParams({
         page: '1'
     });
 
-    const [isPrev, setIsPrev] = useState<boolean | null>(null);
-    const [isNext, setIsNext] = useState<boolean | null>(null);
+    const {currentPage, totalPages} = useAppSelector(state => state.movies);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         const page = parseInt(query.get('page') || '1', 10);
-
-        if (page > 1) {
-            setIsPrev(true);
-        } else {
-            setIsPrev(false);
-        }
-
-        if (page < 500) {
-            setIsNext(true);
-        } else {
-            setIsNext(false);
-        }
-    }, [query]);
+        dispatch(movieActions.setCurrentPage(page));
+    }, [query, dispatch]);
 
     const changePage = (action: string) => {
-        let page = parseInt(query.get('page') || '1', 10);
+        let page = currentPage;
 
         switch (action) {
             case 'prev':
                 if (page > 1) {
-                    page -= 1;
-                    setQuery({page: page.toString()});
+                    dispatch(movieActions.setCurrentPage(page - 1));
                 }
                 break;
             case 'next':
-                if (page < 500) {
-                    page += 1;
-                    setQuery({page: page.toString()});
+                if (page < totalPages) {
+                    dispatch(movieActions.setCurrentPage(page + 1));
                 }
                 break;
             default:
@@ -49,10 +38,10 @@ const PaginationComponent = () => {
     return (
         <>
             <div>
-                <button onClick={() => changePage('prev')} disabled={!isPrev}>
+                <button onClick={() => changePage('prev')} disabled={currentPage <= 1}>
                     prev
                 </button>
-                <button onClick={() => changePage('next')} disabled={!isNext}>
+                <button onClick={() => changePage('next')} disabled={currentPage >= totalPages}>
                     next
                 </button>
             </div>

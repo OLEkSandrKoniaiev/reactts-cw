@@ -14,7 +14,6 @@ const MainLayout = () => {
 
     return (
         <div>
-            MainLayout
             <HeaderComponent/>
             <Outlet/>
             <button onClick={csajk}>click</button>

@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import MoviesList from "../components/MoviesContainer/MoviesList";
-import {useSearchParams} from "react-router-dom";
-import {IPaginatedMovieModel} from "../interfaces/IPaginatedMovieModel";
-import {movieService} from "../services/movie.service";
+// import {useSearchParams} from "react-router-dom";
+// import {IPaginatedMovieModel} from "../interfaces/IPaginatedMovieModel";
+// import {movieService} from "../services/movie.service";
 import PaginationComponent from "../components/PaginationContainer/PaginationComponent";
 import GenresComponent from "../components/GenresContainer/GenresComponent";
 
