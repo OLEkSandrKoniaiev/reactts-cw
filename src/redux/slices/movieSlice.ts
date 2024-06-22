@@ -1,25 +1,28 @@
 import {IMovieModel} from "../../interfaces/IMovieModel";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {movieService} from "../../services/movie.service";
+import {IPaginatedMovieModel} from "../../interfaces/IPaginatedMovieModel";
 
 interface IState {
-    movies: IMovieModel[]
+    movies: IMovieModel[];
+    error: string | null;
 }
 
-let initialState: IState = {
-    movies: []
-}
+const initialState: IState = {
+    movies: [],
+    error: null
+};
 
-const getAllMovies = createAsyncThunk<IMovieModel[], void>(
+const getAllMovies = createAsyncThunk<IPaginatedMovieModel, number>(
     'movieSlice/getAllMovies',
-    async (_, {rejectWithValue}) => {
+    async (page, {rejectWithValue}) => {
         try {
-            return await movieService.getAllMovies(1);
-        } catch (e) {
-            return rejectWithValue(e);
+            return await movieService.getAll(page.toString());
+        } catch (e: any) {
+            return rejectWithValue(e.message);
         }
     }
-)
+);
 
 const movieSlice = createSlice({
     name: 'movieSlice',
@@ -28,18 +31,21 @@ const movieSlice = createSlice({
     extraReducers: builder =>
         builder
             .addCase(getAllMovies.fulfilled, (state, action) => {
-                state.movies = action.payload;
+                state.movies = action.payload.results;
+            })
+            .addCase(getAllMovies.rejected, (state, action) => {
+                state.error = action.payload as string;
             })
 });
 
 const {reducer: movieReducer, actions} = movieSlice;
 
-const movieAction = {
+const movieActions = {
     ...actions,
     getAllMovies
-}
+};
 
 export {
     movieReducer,
-    movieAction
-}
+    movieActions
+};

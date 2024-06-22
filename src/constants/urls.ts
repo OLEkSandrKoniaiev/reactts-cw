@@ -1,8 +1,11 @@
 const baseURL = 'https://api.themoviedb.org/3';
 
 const urls = {
-    movies: {
-        base: `${baseURL}/discover/movie`
+    discover: {
+        movie: `${baseURL}/discover/movie`
+    },
+    genre: {
+        movie_list: `${baseURL}/genre/movie/list`
     }
 };
 

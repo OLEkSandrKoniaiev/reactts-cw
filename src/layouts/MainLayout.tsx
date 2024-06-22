@@ -2,12 +2,14 @@ import React from 'react';
 import {Outlet} from "react-router-dom";
 import HeaderComponent from "../components/Header/HeaderComponent";
 import {movieService} from "../services/movie.service";
+import {genreService} from "../services/genre.service";
 
 
 const MainLayout = () => {
     const csajk = ():void => {
-        movieService.getAllMovies('1');
-        movieService.getAllMovies('2');
+        movieService.getAll('1');
+        movieService.getAll('2');
+        genreService.getAll();
     }
 
     return (

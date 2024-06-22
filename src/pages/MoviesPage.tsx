@@ -1,33 +1,39 @@
 import React, {useEffect, useState} from 'react';
-import MoviesComponent from "../components/MoviesContainer/MoviesComponent";
+import MoviesList from "../components/MoviesContainer/MoviesList";
 import {useSearchParams} from "react-router-dom";
-import {IPaginatedMoviePageModel} from "../interfaces/IPaginatedMoviePageModel";
+import {IPaginatedMovieModel} from "../interfaces/IPaginatedMovieModel";
 import {movieService} from "../services/movie.service";
 import PaginationComponent from "../components/PaginationContainer/PaginationComponent";
+import GenresComponent from "../components/GenresContainer/GenresComponent";
 
 const MoviesPage = () => {
-    const [query, setQuery] = useSearchParams({
-        page: '1'
-    });
 
-    const [moviesPaginatedObject, setMoviesPaginatedObject] = useState<IPaginatedMoviePageModel>({
-        results: [],
-        page: 1,
-        total_pages: 0,
-        total_results: 0
-    });
+    // const [genreId, setGenreId] = useState<number | null>(null);
 
-    useEffect(() => {
-        movieService.getAllMovies(query.get('page') || '1').then(value => {
-            if (value) {
-                setMoviesPaginatedObject(value);
-            }
-        });
-    }, [query]);
+    // const [query, setQuery] = useSearchParams({
+    //     page: '1'
+    // });
+    //
+    // const [moviesPaginatedObject, setMoviesPaginatedObject] = useState<IPaginatedMovieModel>({
+    //     results: [],
+    //     page: 1,
+    //     total_pages: 0,
+    //     total_results: 0
+    // });
+    //
+    // useEffect(() => {
+    //     movieService.getAll(query.get('page') || '1').then(value => {
+    //         if (value) {
+    //             setMoviesPaginatedObject(value);
+    //         }
+    //     });
+    // }, [query]);
 
     return (
         <div>
-            <MoviesComponent movies={moviesPaginatedObject.results}/>
+            <GenresComponent/>
+            <MoviesList/>
+            {/*movies={moviesPaginatedObject.results}*/}
             <PaginationComponent/>
         </div>
     );
