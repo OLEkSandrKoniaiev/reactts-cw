@@ -3,6 +3,7 @@ import MoviesComponent from "../components/MoviesContainer/MoviesComponent";
 import {useSearchParams} from "react-router-dom";
 import {IPaginatedMoviePageModel} from "../interfaces/IPaginatedMoviePageModel";
 import {movieService} from "../services/movie.service";
+import PaginationComponent from "../components/PaginationContainer/PaginationComponent";
 
 const MoviesPage = () => {
     const [query, setQuery] = useSearchParams({
@@ -27,6 +28,7 @@ const MoviesPage = () => {
     return (
         <div>
             <MoviesComponent movies={moviesPaginatedObject.results}/>
+            <PaginationComponent/>
         </div>
     );
 };
