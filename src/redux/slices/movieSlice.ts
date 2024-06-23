@@ -48,6 +48,17 @@ const getAllMoviesByGenre = createAsyncThunk<IPaginatedMovieModel, FetchMoviesPa
     }
 );
 
+const getMovieById = createAsyncThunk<IMovieModel, string>(
+    'movieSlice/getMovieById',
+    async (id, {rejectWithValue}) => {
+        try {
+            return await movieService.getMovieById(id);
+        } catch (e: any) {
+            return rejectWithValue(e.message);
+        }
+    }
+);
+
 const movieSlice = createSlice({
     name: 'movieSlice',
     initialState,
@@ -78,6 +89,12 @@ const movieSlice = createSlice({
             .addCase(getAllMoviesByGenre.rejected, (state, action) => {
                 state.error = action.payload as string;
             })
+            .addCase(getMovieById.fulfilled, (state, action) => {
+                state.movie = action.payload || null;
+            })
+            .addCase(getMovieById.rejected, (state, action) => {
+                state.error = action.payload as string;
+            })
 });
 
 const {reducer: movieReducer, actions} = movieSlice;
@@ -85,7 +102,8 @@ const {reducer: movieReducer, actions} = movieSlice;
 const movieActions = {
     ...actions,
     getAllMovies,
-    getAllMoviesByGenre
+    getAllMoviesByGenre,
+    getMovieById
 };
 
 export {

@@ -21,13 +21,9 @@ const MovieSearchList = () => {
         return <div>Error: {error}</div>;
     }
 
-    if (!movies) {
-        return <div>Loading...</div>;
-    }
-
     return (
         <div>
-            {movies.map(movie => <MoviesListCard key={movie.id} singleMovie={movie}/>)}
+            {movies?.map(movie => <MoviesListCard key={movie.id} singleMovie={movie}/>)}
         </div>
     );
 };

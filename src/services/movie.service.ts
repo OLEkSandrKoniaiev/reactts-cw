@@ -2,6 +2,7 @@ import {IPaginatedMovieModel} from "../interfaces/IPaginatedMovieModel";
 import {apiService} from "./api.service";
 import {urls} from "../constants/urls";
 import {AxiosError} from "axios";
+import {IMovieModel} from "../interfaces/IMovieModel";
 
 const movieService = {
     getAll: async (page?: string, genreId?: string): Promise<IPaginatedMovieModel | null> => {
@@ -26,6 +27,17 @@ const movieService = {
                 params.query = queryRequest;
             }
             const response = await apiService.get<IPaginatedMovieModel>(urls.search.movie, {params});
+            return response.data;
+        } catch (e) {
+            let axiosError = e as AxiosError;
+            console.log(axiosError);
+        }
+        return null;
+    },
+
+    getMovieById: async (id: string): Promise<IMovieModel | null> => {
+        try {
+            const response = await apiService.get<IMovieModel>(`${urls.movie}/${id}`);
             return response.data;
         } catch (e) {
             let axiosError = e as AxiosError;

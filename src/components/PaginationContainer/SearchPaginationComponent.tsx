@@ -42,17 +42,21 @@ const SearchPaginationComponent = () => {
         }
     }
 
-    return (
-        <div>
-            <button onClick={() => changePage('prev')} disabled={currentPage <= 1}>
-                prev
-            </button>
-            {currentPage} - {totalPages}
-            <button onClick={() => changePage('next')} disabled={currentPage >= totalPages}>
-                next
-            </button>
-        </div>
-    );
+    if (query.get('query') && totalPages > 1) {
+        return (
+            <div>
+                <button onClick={() => changePage('prev')} disabled={currentPage <= 1}>
+                    prev
+                </button>
+                {currentPage} - {totalPages}
+                <button onClick={() => changePage('next')} disabled={currentPage >= totalPages}>
+                    next
+                </button>
+            </div>
+        );
+    }
+
+    return null;
 };
 
 export default SearchPaginationComponent;

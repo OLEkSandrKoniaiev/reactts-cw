@@ -19,5 +19,4 @@
 .navLinkActive {
     text-decoration: none;
     color: blue;
-    pointer-events: none;
 }

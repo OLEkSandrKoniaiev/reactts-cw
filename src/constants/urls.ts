@@ -10,7 +10,8 @@ const urls = {
     search: {
         movie: `${baseURL}/search/movie`
     },
-    configuration: `${baseURL}/configuration`
+    configuration: `${baseURL}/configuration`,
+    movie: `${baseURL}/movie`
 };
 
 export {
