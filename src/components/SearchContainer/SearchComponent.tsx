@@ -9,9 +9,9 @@ const SearchComponent = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const onSubmit = (post: {query: string}) => {
+    const onSubmit = (post: { query: string }) => {
         dispatch(searchActions.searchMovies({page: 1, queryRequest: post.query}));
-        navigate(`?query=${post.query}`);
+        navigate(`?query=${post.query}&page=1`);
     };
 
     return (

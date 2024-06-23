@@ -13,13 +13,13 @@ interface IState {
 const initialState: IState = {
     movies: null,
     currentPage: 1,
-    totalPages: null,
+    totalPages: 0,
     error: null
 };
 
 interface FetchMoviesParams {
     page: number;
-    queryRequest: string
+    queryRequest: string;
 }
 
 const searchMovies = createAsyncThunk<IPaginatedMovieModel, FetchMoviesParams>(
@@ -36,7 +36,11 @@ const searchMovies = createAsyncThunk<IPaginatedMovieModel, FetchMoviesParams>(
 const searchSlice = createSlice({
     name: 'searchSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        setCurrentPage: (state, action) => {
+            state.currentPage = action.payload;
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(searchMovies.fulfilled, (state, action) => {
@@ -49,10 +53,10 @@ const searchSlice = createSlice({
     }
 });
 
-const {reducer: searchReducer} = searchSlice;
+const {reducer: searchReducer, actions} = searchSlice;
 
 const searchActions = {
-    ...searchSlice,
+    ...actions,
     searchMovies
 };
 

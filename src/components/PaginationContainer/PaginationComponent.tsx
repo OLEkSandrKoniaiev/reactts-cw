@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
-import { useSearchParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { movieActions } from "../../redux/slices/movieSlice";
+import React, {useEffect} from 'react';
+import {useSearchParams} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
+import {movieActions} from "../../redux/slices/movieSlice";
 
 const PaginationComponent = () => {
     const [query, setQuery] = useSearchParams({
         page: '1'
     });
 
-    const { currentPage, totalPages, genre } = useAppSelector(state => state.movies);
+    const {currentPage, totalPages, genre} = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        const page = parseInt(query.get('page') || '1', 10);
+        const page = parseInt(query.get('page') || '1');
         dispatch(movieActions.setCurrentPage(page));
     }, [query, dispatch]);
 
@@ -36,7 +36,7 @@ const PaginationComponent = () => {
                 break;
         }
 
-        const params: any = { page: page.toString() };
+        const params: any = {page: page.toString()};
         if (genre) {
             params.with_genres = genre.toString();
         }
@@ -49,6 +49,7 @@ const PaginationComponent = () => {
                 <button onClick={() => changePage('prev')} disabled={currentPage <= 1}>
                     prev
                 </button>
+                <span>{currentPage}</span>
                 <button onClick={() => changePage('next')} disabled={currentPage >= totalPages}>
                     next
                 </button>
