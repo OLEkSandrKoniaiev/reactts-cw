@@ -6,7 +6,11 @@ const urls = {
     },
     genre: {
         movie_list: `${baseURL}/genre/movie/list`
+    },
+    search: {
+        movie: `${baseURL}/search/movie`
     }
 };
 
 export { baseURL, urls };
+

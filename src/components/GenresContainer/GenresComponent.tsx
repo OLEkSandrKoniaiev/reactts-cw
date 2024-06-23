@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {genreActions} from "../../redux/slices/genreSlice";
-import {movieActions} from "../../redux/slices/movieSlice";
-import {useSearchParams} from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { genreActions } from "../../redux/slices/genreSlice";
+import { movieActions } from "../../redux/slices/movieSlice";
+import { useSearchParams } from "react-router-dom";
 
 const GenresComponent = () => {
-    const {genres, error} = useAppSelector(state => state.genres);
-    const {currentPage} = useAppSelector(state => state.movies);
+    const { genres, error } = useAppSelector(state => state.genres);
+    const { currentPage } = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
 
     const [query, setQuery] = useSearchParams({
@@ -18,7 +18,17 @@ const GenresComponent = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        setQuery({page: currentPage.toString()});
+        const genreId = query.get('with_genres');
+        if (genreId) {
+            dispatch(movieActions.setGenre(parseInt(genreId)));
+            dispatch(movieActions.getAllMoviesByGenre({ page: parseInt(query.get('page') || '1'), genreId: parseInt(genreId) }));
+        } else {
+            dispatch(movieActions.getAllMovies(parseInt(query.get('page') || '1')));
+        }
+    }, [query, dispatch]);
+
+    useEffect(() => {
+        setQuery(prev => ({ ...prev, page: currentPage.toString() }));
     }, [currentPage, setQuery]);
 
     if (error) {
@@ -31,15 +41,15 @@ const GenresComponent = () => {
 
     const showGenre = (genreId: number) => {
         return () => {
-            setQuery({page: '1'});
+            setQuery({ page: '1', with_genres: genreId.toString() });
             dispatch(movieActions.setGenre(genreId));
             dispatch(movieActions.setCurrentPage(1));
-            dispatch(movieActions.getAllMoviesByGenre({page: 1, genreId}));
+            dispatch(movieActions.getAllMoviesByGenre({ page: 1, genreId }));
         };
     };
 
     const showAll = () => {
-        setQuery({page: '1'});
+        setQuery({ page: '1' });
         dispatch(movieActions.setGenre(null));
         dispatch(movieActions.setCurrentPage(1));
         dispatch(movieActions.getAllMovies(1));

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
-import HeaderComponent from "../components/Header/HeaderComponent";
+import HeaderComponent from "../components/HeaderContainer/HeaderComponent";
 import {movieService} from "../services/movie.service";
 import {genreService} from "../services/genre.service";
 

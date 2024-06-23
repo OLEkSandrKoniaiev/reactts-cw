@@ -15,7 +15,7 @@ const initialState: IState = {
     movies: [],
     genre: null,
     currentPage: 1,
-    totalPages: 500,
+    totalPages: null,
     error: null
 };
 

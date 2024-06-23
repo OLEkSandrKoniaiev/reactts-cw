@@ -47,14 +47,14 @@ const PaginationComponent = () => {
         <>
             <div>
                 <button onClick={() => changePage('prev')} disabled={currentPage <= 1}>
-                    prev
-                </button>
-                <button onClick={() => changePage('next')} disabled={currentPage >= totalPages}>
-                    next
-                </button>
-            </div>
-        </>
-    );
+    prev
+    </button>
+    <button onClick={() => changePage('next')} disabled={currentPage >= totalPages}>
+    next
+    </button>
+    </div>
+    </>
+);
 };
 
 export default PaginationComponent;
