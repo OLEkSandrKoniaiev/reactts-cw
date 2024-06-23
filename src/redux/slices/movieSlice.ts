@@ -5,6 +5,7 @@ import {IPaginatedMovieModel} from "../../interfaces/IPaginatedMovieModel";
 
 interface IState {
     movies: IMovieModel[];
+    movie: IMovieModel | null;
     genre: number | null;
     currentPage: number;
     totalPages: number;
@@ -13,6 +14,7 @@ interface IState {
 
 const initialState: IState = {
     movies: [],
+    movie: null,
     genre: null,
     currentPage: 1,
     totalPages: null,
@@ -55,6 +57,9 @@ const movieSlice = createSlice({
         },
         setGenre: (state, action) => {
             state.genre = action.payload;
+        },
+        setMovie: (state, action) => {
+            state.movie = action.payload;
         }
     },
     extraReducers: builder =>

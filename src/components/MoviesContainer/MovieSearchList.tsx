@@ -27,7 +27,7 @@ const MovieSearchList = () => {
 
     return (
         <div>
-            {movies.map(movie => <MoviesListCard key={movie.id} movie={movie}/>)}
+            {movies.map(movie => <MoviesListCard key={movie.id} singleMovie={movie}/>)}
         </div>
     );
 };

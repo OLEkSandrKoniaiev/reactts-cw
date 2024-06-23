@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { movieActions } from "../../redux/slices/movieSlice";
+import React, {useEffect} from 'react';
+import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
+import {movieActions} from "../../redux/slices/movieSlice";
 import MoviesListCard from "./MoviesListCard";
-import { useSearchParams } from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 
 const MoviesList = () => {
     const [query, setQuery] = useSearchParams({
         page: '1'
     });
 
-    const { movies, currentPage, genre, error } = useAppSelector(state => state.movies);
+    const {movies, currentPage, genre, error} = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -17,14 +17,14 @@ const MoviesList = () => {
         const page = parseInt(query.get('page') || '1');
         if (genreId) {
             dispatch(movieActions.setGenre(parseInt(genreId)));
-            dispatch(movieActions.getAllMoviesByGenre({ page, genreId: parseInt(genreId) }));
+            dispatch(movieActions.getAllMoviesByGenre({page, genreId: parseInt(genreId)}));
         } else {
             dispatch(movieActions.getAllMovies(page));
         }
     }, [query, dispatch]);
 
     useEffect(() => {
-        const params: any = { page: currentPage.toString() };
+        const params: any = {page: currentPage.toString()};
         if (genre) {
             params.with_genres = genre.toString();
         }
@@ -41,7 +41,7 @@ const MoviesList = () => {
 
     return (
         <div>
-            {movies.map(movie => <MoviesListCard key={movie.id} movie={movie} />)}
+            {movies.map(movie => <MoviesListCard key={movie.id} singleMovie={movie}/>)}
         </div>
     );
 };
