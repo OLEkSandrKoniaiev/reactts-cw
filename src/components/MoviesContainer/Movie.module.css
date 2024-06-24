@@ -31,3 +31,22 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.header {
+    color: #4F8AC1;
+
+    font-family: Inter, serif;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 800;
+    line-height: normal;
+
+    text-align: center;
+
+    margin-top: 40px;
+    user-select: none;
+}
+
+.header:hover {
+    color: #252E5B;
+}

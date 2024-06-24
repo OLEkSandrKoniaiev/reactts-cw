@@ -7,6 +7,8 @@ import {IMovieInfoModel} from "../../interfaces/IMovieInfoModel";
 interface IState {
     movies: IMovieModel[];
     movie: IMovieInfoModel | null;
+    newMovies: IMovieModel[];
+    popularMovies: IMovieModel[];
     genre: number | null;
     currentPage: number;
     totalPages: number;
@@ -16,6 +18,8 @@ interface IState {
 const initialState: IState = {
     movies: [],
     movie: null,
+    newMovies: [],
+    popularMovies: [],
     genre: null,
     currentPage: 1,
     totalPages: null,
@@ -60,6 +64,28 @@ const getMovieById = createAsyncThunk<IMovieInfoModel, string>(
     }
 );
 
+const getNewMovies = createAsyncThunk<IMovieModel[]>(
+    'movieSlice/getNewMovies',
+    async (_, {rejectWithValue}) => {
+        try {
+            return await movieService.getNewMovies();
+        } catch (e: any) {
+            return rejectWithValue(e.message);
+        }
+    }
+);
+
+const getPopularMovies = createAsyncThunk<IMovieModel[]>(
+    'movieSlice/getPopularMovies',
+    async (_, {rejectWithValue}) => {
+        try {
+            return await movieService.getPopularMovies();
+        } catch (e: any) {
+            return rejectWithValue(e.message);
+        }
+    }
+);
+
 const movieSlice = createSlice({
     name: 'movieSlice',
     initialState,
@@ -96,6 +122,18 @@ const movieSlice = createSlice({
             .addCase(getMovieById.rejected, (state, action) => {
                 state.error = action.payload as string;
             })
+            .addCase(getNewMovies.fulfilled, (state, action) => {
+                state.newMovies = action.payload || [];
+            })
+            .addCase(getNewMovies.rejected, (state, action) => {
+                state.error = action.payload as string;
+            })
+            .addCase(getPopularMovies.fulfilled, (state, action) => {
+                state.popularMovies = action.payload || [];
+            })
+            .addCase(getPopularMovies.rejected, (state, action) => {
+                state.error = action.payload as string;
+            })
 });
 
 const {reducer: movieReducer, actions} = movieSlice;
@@ -104,7 +142,9 @@ const movieActions = {
     ...actions,
     getAllMovies,
     getAllMoviesByGenre,
-    getMovieById
+    getMovieById,
+    getNewMovies,
+    getPopularMovies
 };
 
 export {

@@ -45,6 +45,38 @@ const movieService = {
             console.log(axiosError);
         }
         return null;
+    },
+
+    getNewMovies: async (): Promise<IMovieModel[] | null> => {
+        try {
+            const response = await apiService.get<IPaginatedMovieModel>(urls.discover.movie, {
+                params: {
+                    sort_by: "release_date.desc",
+                    page: 1,
+                },
+            });
+            return response.data.results;
+        } catch (e) {
+            let axiosError = e as AxiosError;
+            console.log(axiosError);
+        }
+        return null;
+    },
+
+    getPopularMovies: async (): Promise<IMovieModel[] | null> => {
+        try {
+            const response = await apiService.get<IPaginatedMovieModel>(urls.discover.movie, {
+                params: {
+                    sort_by: "popularity.desc",
+                    page: 1,
+                },
+            });
+            return response.data.results;
+        } catch (e) {
+            let axiosError = e as AxiosError;
+            console.log(axiosError);
+        }
+        return null;
     }
 };
 
