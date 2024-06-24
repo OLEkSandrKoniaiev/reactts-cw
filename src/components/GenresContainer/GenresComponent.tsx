@@ -3,12 +3,13 @@ import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {genreActions} from "../../redux/slices/genreSlice";
 import {movieActions} from "../../redux/slices/movieSlice";
 import {useSearchParams} from "react-router-dom";
-import {Button, ButtonGroup} from "@mui/material";
+import {Button} from "@mui/material";
 import styles from "./Genres.module.css"
 
 const GenresComponent = () => {
     const {genres, error} = useAppSelector(state => state.genres);
     const {currentPage} = useAppSelector(state => state.movies);
+    const {theme} = useAppSelector(state => state.theme);
     const dispatch = useAppDispatch();
 
     const [query, setQuery] = useSearchParams({
@@ -63,15 +64,16 @@ const GenresComponent = () => {
     return (
         <div className={styles.genresBlock}>
             <div className={styles.genresButtonsBlock}>
-                <Button variant="outlined" className={styles.genresButton} onClick={showAll} key={0}>
+                <Button variant="outlined" color={theme ? 'error' : 'primary'} className={styles.genresButton}
+                        onClick={showAll} key={0}>
                     Всі
                 </Button>
                 {genres.map(genre => (
-                    <Button variant="outlined" className={styles.genresButton} onClick={showGenre(genre.id)}
+                    <Button variant="outlined" color={theme ? 'error' : 'primary'} className={styles.genresButton}
+                            onClick={showGenre(genre.id)}
                             key={genre.id}>
                         {genre.name}
-                    </Button>
-                ))}
+                    </Button>))}
             </div>
         </div>
     );

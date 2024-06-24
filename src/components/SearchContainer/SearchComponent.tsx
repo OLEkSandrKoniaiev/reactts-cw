@@ -1,6 +1,6 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
-import {useAppDispatch} from "../../hooks/reduxHooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {searchActions} from "../../redux/slices/searchSlice";
 import {useNavigate} from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
@@ -9,6 +9,7 @@ import styles from "./Search.module.css"
 
 const SearchComponent = () => {
     const {register, handleSubmit} = useForm<{ query: string }>();
+    const {theme} = useAppSelector(state => state.theme);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ const SearchComponent = () => {
         <div className={styles.searchBlock}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <TextField id="standard-basic" variant="standard" {...register('query')} placeholder="Пошук фільмів..."/>
-                <Button type="submit" variant="outlined">Пошук <SearchIcon/></Button>
+                <Button type="submit" variant="outlined" color={theme ? 'error' : 'primary'}>Пошук <SearchIcon/></Button>
             </form>
         </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import MovieInfoComponent from "../components/MovieInfoContainer/MovieInfoComponent";
-import styles from "./General.module.css";
+import styles from "../styles/General.module.css";
 
 const MovieInfoPage = () => {
     return (

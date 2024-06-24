@@ -1,12 +1,35 @@
-.navBlock {
+.navBlockLight {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 
     width: 100%;
 
     padding: 20px 0;
 
     background-color: #f9f9f9;
+
+    font-family: Inter, serif;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 900;
+    line-height: normal;
+
+    user-select: none;
+
+    border-radius: 20px 20px 0 0;
+}
+
+.navBlockDark {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 20px 0;
+
+    background-color: #181818;
 
     font-family: Inter, serif;
     font-size: 16px;
@@ -26,13 +49,24 @@
     align-items: center;
 }
 
-.navLink {
+.navLinkLight {
     text-decoration: none;
     color: #4F8AC1;
     font-weight: bold;
 }
 
-.navLinkActive {
+.navLinkDark {
+    text-decoration: none;
+    color: #C14F4F;
+    font-weight: bold;
+}
+
+.navLinkActiveLight {
     text-decoration: none;
     color: #0F0F0F;
+}
+
+.navLinkActiveDark {
+    text-decoration: none;
+    color: #f9f9f9;
 }

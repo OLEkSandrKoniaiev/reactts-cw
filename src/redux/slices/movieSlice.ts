@@ -1,5 +1,5 @@
 import {IMovieModel} from "../../interfaces/IMovieModel";
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, isRejected} from "@reduxjs/toolkit";
 import {movieService} from "../../services/movie.service";
 import {IPaginatedMovieModel} from "../../interfaces/IPaginatedMovieModel";
 import {IMovieInfoModel} from "../../interfaces/IMovieInfoModel";
@@ -95,9 +95,6 @@ const movieSlice = createSlice({
         },
         setGenre: (state, action) => {
             state.genre = action.payload;
-        },
-        setMovie: (state, action) => {
-            state.movie = action.payload;
         }
     },
     extraReducers: builder =>
@@ -106,32 +103,20 @@ const movieSlice = createSlice({
                 state.movies = action.payload.results || [];
                 state.totalPages = action.payload.total_pages || 0;
             })
-            .addCase(getAllMovies.rejected, (state, action) => {
-                state.error = action.payload as string;
-            })
             .addCase(getAllMoviesByGenre.fulfilled, (state, action) => {
                 state.movies = action.payload.results || [];
                 state.totalPages = action.payload.total_pages || 0;
             })
-            .addCase(getAllMoviesByGenre.rejected, (state, action) => {
-                state.error = action.payload as string;
-            })
             .addCase(getMovieById.fulfilled, (state, action) => {
                 state.movie = action.payload || null;
-            })
-            .addCase(getMovieById.rejected, (state, action) => {
-                state.error = action.payload as string;
             })
             .addCase(getNewMovies.fulfilled, (state, action) => {
                 state.newMovies = action.payload || [];
             })
-            .addCase(getNewMovies.rejected, (state, action) => {
-                state.error = action.payload as string;
-            })
             .addCase(getPopularMovies.fulfilled, (state, action) => {
                 state.popularMovies = action.payload || [];
             })
-            .addCase(getPopularMovies.rejected, (state, action) => {
+            .addMatcher(isRejected(getAllMovies, getAllMoviesByGenre, getMovieById, getNewMovies, getPopularMovies), (state, action) => {
                 state.error = action.payload as string;
             })
 });

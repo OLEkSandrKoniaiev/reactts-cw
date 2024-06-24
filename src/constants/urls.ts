@@ -2,16 +2,16 @@ const baseURL = 'https://api.themoviedb.org/3';
 
 const urls = {
     discover: {
-        movie: `${baseURL}/discover/movie`
+        movie: '/discover/movie'
     },
     genre: {
-        movie_list: `${baseURL}/genre/movie/list`
+        movie_list: '/genre/movie/list'
     },
     search: {
-        movie: `${baseURL}/search/movie`
+        movie: '/search/movie'
     },
-    configuration: `${baseURL}/configuration`,
-    movie: `${baseURL}/movie`
+    configuration: '/configuration',
+    movie: '/movie'
 };
 
 export {

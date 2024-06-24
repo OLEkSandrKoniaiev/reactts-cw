@@ -4,13 +4,20 @@
     flex-direction: column;
     width: 90%;
     align-items: center;
+    margin-top: 40px;
 }
 
-.root {
+.rootLight {
     display: flex;
     width: 100%;
     justify-content: center;
-    margin: 0;
+}
+
+.rootDark {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: #232323;
 }
 
 /*ErrorPage*/
