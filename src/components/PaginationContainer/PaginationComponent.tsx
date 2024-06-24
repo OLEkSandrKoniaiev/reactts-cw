@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import {useSearchParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {movieActions} from "../../redux/slices/movieSlice";
+import styles from "./Pagination.module.css"
+import {Button} from "@mui/material";
 
 const PaginationComponent = () => {
     const [query, setQuery] = useSearchParams({
@@ -45,17 +47,15 @@ const PaginationComponent = () => {
     }
 
     return (
-        <>
-            <div>
-                <button onClick={() => changePage('prev')} disabled={currentPage <= 1}>
-                    prev
-                </button>
-                <span>{currentPage}</span>
-                <button onClick={() => changePage('next')} disabled={currentPage >= totalPages}>
-                    next
-                </button>
-            </div>
-        </>
+        <div className={styles.paginationBlock}>
+            <Button variant="contained" onClick={() => changePage('prev')} disabled={currentPage <= 1}>
+                prev
+            </Button>
+            {currentPage} з {totalPages}
+            <Button variant="contained" onClick={() => changePage('next')} disabled={currentPage >= totalPages}>
+                next
+            </Button>
+        </div>
     );
 };
 

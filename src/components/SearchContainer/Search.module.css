@@ -1,0 +1,13 @@
+.searchBlock {
+    height: 200px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchBlock form {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}

@@ -1,0 +1,15 @@
+.paginationBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100px;
+
+    gap: 10px;
+
+    font-family: Inter, serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}

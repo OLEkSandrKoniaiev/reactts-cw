@@ -1,0 +1,81 @@
+/*MainLayout*/
+.mainLayout {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+}
+
+.root {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+}
+
+/*ErrorPage*/
+.errorPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100ch;
+    width: 100%;
+}
+
+.errorPage div {
+    text-align: center;
+
+    width: 100%;
+
+    margin-bottom: 20px;
+}
+
+.navLink {
+    text-decoration: none;
+    color: #252E5B;
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+.navLink:hover {
+    text-decoration: none;
+    color: #4F8AC1;
+    font-weight: bold;
+}
+
+.navLinkActive {
+    text-decoration: none;
+    color: #0F0F0F;
+}
+
+
+/*HomePage*/
+.homePage {
+    width: 100%;
+
+    border-radius: 0 0 20px 20px;
+
+    background-color: #f9f9f9;
+}
+
+
+/*MoviesPage*/
+.moviesPage {
+    width: 100%;
+
+    border-radius: 0 0 20px 20px;
+
+    background-color: #f9f9f9;
+}
+
+
+/*MovieInfoPage*/
+.movieInfoPage {
+    width: 100%;
+
+    border-radius: 0 0 20px 20px;
+
+    background-color: #f9f9f9;
+}

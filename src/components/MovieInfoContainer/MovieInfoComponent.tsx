@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import {movieActions} from "../../redux/slices/movieSlice";
 import PosterPreviewComponent from "../PosterContainer/PosterPreviewComponent";
 import StarRatings from 'react-star-ratings';
+import styles from "./MovieInfo.module.css"
 
 const MovieInfoComponent = () => {
     const {id} = useParams();
@@ -25,30 +26,32 @@ const MovieInfoComponent = () => {
     }
 
     return (
-        <div>
-            <div>
+        <>
+            <h1 className={styles.title}>{movie.title}</h1>
+            <div className={styles.movieInfoBlock}>
                 <div>
-                    <h1>{movie.title}</h1>
                     <PosterPreviewComponent path={movie.poster_path} size={3} lang={movie.original_language}
                                             genres={movie.genres}/>
-                    <p>{movie.popularity}</p>
-                    <p>{movie.vote_count}</p>
-                    <StarRatings
-                        rating={movie.vote_average}
-                        starRatedColor="blue"
-                        numberOfStars={10}
-                        name='rating'
-                        starDimension="20px"
-                        starSpacing="2px"/>
+                    <div className={styles.rateBlock}>
+                        <span>Популярність - {movie.popularity}</span>
+                        <span>Проголосувало - {movie.vote_count}</span>
+                        <StarRatings
+                            rating={movie.vote_average}
+                            starRatedColor="#4F8AC1"
+                            numberOfStars={10}
+                            name='rating'
+                            starDimension="20px"
+                            starSpacing="2px"/>
+                    </div>
                 </div>
-                <div>
-                    <p>{movie.original_title}</p>
-                    <p>{movie.overview}</p>
-                    <p>{movie.release_date}</p>
-                    <p>{movie.vote_average}</p>
+                <div className={styles.describeBlock}>
+                    <span>Назва: <b>{movie.original_title}</b></span>
+                    <span>Опис: {movie.overview}</span>
+                    <span>Дата релізу: {movie.release_date}</span>
+                    <span>Та інша інформація...</span>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

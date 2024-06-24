@@ -1,22 +1,38 @@
 .navBlock {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+
+    width: 100%;
 
     padding: 20px 0;
 
-    background-color: #adadad;
+    background-color: #f9f9f9;
 
-    font-size: 16pt;
-    font-weight: bold;
+    font-family: Inter, serif;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 900;
+    line-height: normal;
+
+    user-select: none;
+
+    border-radius: 20px 20px 0 0;
+}
+
+.navBlock div {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navLink {
     text-decoration: none;
-    color: grey;
+    color: #4F8AC1;
     font-weight: bold;
 }
 
 .navLinkActive {
     text-decoration: none;
-    color: blue;
+    color: #0F0F0F;
 }

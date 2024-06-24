@@ -6,15 +6,16 @@ import {urls} from "../constants/urls";
 const genreService = {
     getAll: async (): Promise<IGenreModel[]> => {
         try {
-            const response = await apiService.get<{ genres: IGenreModel[] }>(urls.genre.movie_list, { params: { language: 'uk' } });
-            console.log(response.data);
+            const response = await apiService.get<{
+                genres: IGenreModel[]
+            }>(urls.genre.movie_list, {params: {language: 'uk'}});
             return response.data.genres;
         } catch (e) {
             let axiosError = e as AxiosError;
             console.log(axiosError);
-            throw axiosError; // Переконайтеся, що помилки кидаються
+            throw axiosError;
         }
     }
 };
 
-export { genreService };
+export {genreService};

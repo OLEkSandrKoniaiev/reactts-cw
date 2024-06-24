@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {movieActions} from "../../redux/slices/movieSlice";
 import MoviesListCard from "./MoviesListCard";
 import {useSearchParams} from "react-router-dom";
+import styles from "./Movie.module.css"
 
 const MoviesList = () => {
     const [query, setQuery] = useSearchParams({
@@ -40,7 +41,7 @@ const MoviesList = () => {
     }
 
     return (
-        <div>
+        <div className={styles.CardsBlock}>
             {movies.map(movie => <MoviesListCard key={movie.id} singleMovie={movie}/>)}
         </div>
     );

@@ -3,6 +3,9 @@ import {useForm} from "react-hook-form";
 import {useAppDispatch} from "../../hooks/reduxHooks";
 import {searchActions} from "../../redux/slices/searchSlice";
 import {useNavigate} from "react-router-dom";
+import SearchIcon from '@mui/icons-material/Search';
+import {Button, TextField} from "@mui/material";
+import styles from "./Search.module.css"
 
 const SearchComponent = () => {
     const {register, handleSubmit} = useForm<{ query: string }>();
@@ -15,10 +18,10 @@ const SearchComponent = () => {
     };
 
     return (
-        <div>
+        <div className={styles.searchBlock}>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...register('query')} placeholder="Search for movies..."/>
-                <button type="submit">Search</button>
+                <TextField id="standard-basic" variant="standard" {...register('query')} placeholder="Пошук фільмів..."/>
+                <Button type="submit" variant="outlined">Пошук <SearchIcon/></Button>
             </form>
         </div>
     );

@@ -26,9 +26,7 @@ const getAllGenres = createAsyncThunk<IGenreModel[], void, { rejectValue: string
 const genreSlice = createSlice({
     name: 'genreSlice',
     initialState,
-    reducers: {
-
-    },
+    reducers: {},
     extraReducers: builder =>
         builder
             .addCase(getAllGenres.fulfilled, (state, action) => {
