@@ -17,6 +17,7 @@ const PaginationComponent = () => {
     }, [query, dispatch]);
 
     const changePage = (action: string) => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
         let page = currentPage;
 
         switch (action) {

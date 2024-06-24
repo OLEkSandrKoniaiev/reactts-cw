@@ -2,10 +2,11 @@ import {IMovieModel} from "../../interfaces/IMovieModel";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {movieService} from "../../services/movie.service";
 import {IPaginatedMovieModel} from "../../interfaces/IPaginatedMovieModel";
+import {IMovieInfoModel} from "../../interfaces/IMovieInfoModel";
 
 interface IState {
     movies: IMovieModel[];
-    movie: IMovieModel | null;
+    movie: IMovieInfoModel | null;
     genre: number | null;
     currentPage: number;
     totalPages: number;
@@ -48,7 +49,7 @@ const getAllMoviesByGenre = createAsyncThunk<IPaginatedMovieModel, FetchMoviesPa
     }
 );
 
-const getMovieById = createAsyncThunk<IMovieModel, string>(
+const getMovieById = createAsyncThunk<IMovieInfoModel, string>(
     'movieSlice/getMovieById',
     async (id, {rejectWithValue}) => {
         try {

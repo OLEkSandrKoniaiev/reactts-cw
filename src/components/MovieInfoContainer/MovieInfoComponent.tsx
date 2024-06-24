@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {NavLink, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {movieActions} from "../../redux/slices/movieSlice";
 import PosterPreviewComponent from "../PosterContainer/PosterPreviewComponent";
+import StarRatings from 'react-star-ratings';
 
 const MovieInfoComponent = () => {
     const {id} = useParams();
@@ -19,9 +20,6 @@ const MovieInfoComponent = () => {
         return <div>Error: {error}</div>;
     }
 
-    console.log(id);
-    console.log(movie);
-
     if (!movie) {
         return <div>Loading...</div>;
     }
@@ -31,23 +29,24 @@ const MovieInfoComponent = () => {
             <div>
                 <div>
                     <h1>{movie.title}</h1>
-                    <PosterPreviewComponent path={movie.poster_path} size={3}/>
+                    <PosterPreviewComponent path={movie.poster_path} size={3} lang={movie.original_language}
+                                            genres={movie.genres}/>
                     <p>{movie.popularity}</p>
                     <p>{movie.vote_count}</p>
+                    <StarRatings
+                        rating={movie.vote_average}
+                        starRatedColor="blue"
+                        numberOfStars={10}
+                        name='rating'
+                        starDimension="20px"
+                        starSpacing="2px"/>
                 </div>
                 <div>
                     <p>{movie.original_title}</p>
                     <p>{movie.overview}</p>
                     <p>{movie.release_date}</p>
                     <p>{movie.vote_average}</p>
-                    <p>{movie.original_language}</p>
-                    <p>{movie.genre_ids}</p>
-                    {/*<p>{movie.video}</p>*/}
-                    {/*<p>{movie.backdrop_path}</p>*/}
                 </div>
-            </div>
-            <div>
-
             </div>
         </div>
     );
